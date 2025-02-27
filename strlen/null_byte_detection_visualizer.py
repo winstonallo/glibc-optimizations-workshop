@@ -47,7 +47,7 @@ class StrlenVisualizer:
 
         def step1():
             print(colored("Step 1: Subtracting lomagic from w", "yellow"))
-            print(f"The subtraction {code('w - lomagic')} causes any {code('0x00')} byte in {code('w')} to underflow to {code('0xFF')}, while also making sure the MSB of any byte {code('0x01 <= b <= 0x81')} is cleared.")
+            print(f"The subtraction {code('w - lomagic')} causes any {code('0x00')} byte in {code('w')} to underflow to {code('0xFF')}, while also making sure the MSB of any byte {code('0x01 <= b <= 0x80')} is cleared.")
             print(f"    {code(tobin(w))} // {code(tohex(w))}")
             print(f"  - {code(tobin(self.LOMAGIC))} // {code(tohex(self.LOMAGIC))}")
             print("    ________________________________")
