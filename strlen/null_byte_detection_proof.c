@@ -8,7 +8,7 @@ int main() {
         uint8_t a = (uint8_t)byte - 0x01;
         uint8_t b = ~byte;
 
-        if (byte <= 128) {
+        if (byte <= 0x80) {
             assert(!(a & 0x80));
         } else {
             assert(!(b & 0x80));

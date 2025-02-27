@@ -34,9 +34,9 @@ class StrlenVisualizer:
             print()
             prompt("the introduction")
 
-            print("The goal of this optimization is to detect null bytes in 'ws' (4 bytes in this case) instead of checking one byte at a time.")
+            print("The goal of this optimization is to detect null bytes in a whole word instead of checking one byte at a time.")
             print()
-            print(f"{code('A w is a sequence of bytes of <CPU-Architecture> bits length. Here, we use 32-bit mode for simplicity.')}")
+            print(f"{code('A word is a sequence of bytes of <CPU-Architecture> bits length.')}")
             print()
             print("To achieve this, we use two magic values:")
             print(f"1. {code('himagic')} - MSB of each byte set: {code(tobin(self.HIMAGIC))}")
@@ -47,15 +47,15 @@ class StrlenVisualizer:
 
         def step1():
             print(colored("Step 1: Subtracting lomagic from w", "yellow"))
-            print(f"The subtraction {code('w - lomagic')} causes any {code('0x00')} byte in {code('w')} to underflow to {code('0xFF')}.")
+            print(f"The subtraction {code('w - lomagic')} causes any {code('0x00')} byte in {code('w')} to underflow to {code('0xFF')}, while also making sure the MSB of any byte {code('0x01 <= b <= 0x81')} is cleared.")
             print(f"    {code(tobin(w))} // {code(tohex(w))}")
             print(f"  - {code(tobin(self.LOMAGIC))} // {code(tohex(self.LOMAGIC))}")
             print("    ________________________________")
             print(f"    {code(tobin(lw_lomagic))} // {code(tohex(lw_lomagic))}")
 
         def step2():
-            print(colored("Step 2: Applying bitwise NOT to w", "yellow"))
-            print(f"The bitwise NOT (~) flips all bits in {code('w')}:")
+            print(colored("Step 2: Applying bitwise NOT to w.", "yellow"))
+            print(f"The bitwise NOT (~) flips all bits in {code('w')}, turning any {code('0x00')} byte into {code('0xFF')}, while clearing the MSB of any byte {code('0x81 <= b <= 0xFF')}.")
             print(f"  ~ {code(tobin(w))} // {code(tohex(w))}")
             print("    ________________________________")
             print(f"    {code(tobin(lw_not))} // {code(tohex(lw_not))}")
