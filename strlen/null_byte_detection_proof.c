@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <assert.h>
+#include <stdio.h>
 
 int main() {
     for (int i = 1; i <= 0xFF; ++i) {
@@ -7,7 +8,11 @@ int main() {
         uint8_t a = (uint8_t)byte - 0x01;
         uint8_t b = ~byte;
 
-        assert(!(a & 0x80) || !(b & 0x80));
+        if (byte <= 128) {
+            assert(!(a & 0x80));
+        } else {
+            assert(!(b & 0x80));
+        }
     }
 
     uint8_t null_byte = 0;
