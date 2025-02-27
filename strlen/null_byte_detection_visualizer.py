@@ -70,9 +70,9 @@ class StrlenVisualizer:
             print(f"    {code(tobin(result))} // {code(tohex(result))}")
             print()
             if result != 0:
-                print(colored("Result: A null byte was detected in the w!", "green"))
+                print(colored("Result: A null byte was detected in the word!", "green"))
             else:
-                print(colored("Result: No null byte was detected in the w.", "red"))
+                print(colored("Result: No null byte was detected in the word.", "red"))
 
         intro()
         prompt("Step 1")
